@@ -15,7 +15,11 @@ struct song_node * insert_order(struct song_node *n, char s[100], char a[100]){
 }
 
 void print_list(struct song_node *n){
-  ;
+  while(n){
+		printf("%s ", n->s);
+		n = n->next;
+	}
+	printf("\n");
 }
 
 struct song_node * find(char a[100], char s[100]){
