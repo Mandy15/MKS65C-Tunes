@@ -16,18 +16,18 @@ struct song_node{
   struct song_node *next;
 };
 
-struct song_node * insert_front(struct song_node *n, char s[100], char a[100]);
+struct song_node * insert_front(struct song_node *n, char a[100], char s[100]);
 
-struct song_node * insert_order(struct song_node *n, char s[100], char a[100]);
+struct song_node * insert_order(struct song_node *n, char a[100], char s[100]);
 
 void print_list(struct song_node *n);
 
-struct song_node * find(char a[100], char s[100]);
+struct song_node * find(struct song_node *n, char a[100], char s[100]);
 
-struct song_node * find_first(char a[100]);
+struct song_node * find_artist(struct song_node *n, char a[100]);
 
-struct song_node * random();
+struct song_node * random_song(struct song_node *n);
 
-struct song_node * remove(struct song_node *n);
+struct song_node * remove_song(struct song_node *n);
 
 struct song_node * free_list(struct song_node *n);
