@@ -2,15 +2,15 @@
 #include "lib.h"
 
 struct song_node * add(struct song_node *n){
-  ;
+  return n;
 }
 
 struct song_node * search_song(struct song_node *n, char s[100], char a[100]){
-  ;
+  return n;
 }
 
 struct song_node * search_artist(struct song_node *n, char a[100]){
-  ;
+  return n;
 }
 
 void print_letter(struct song_node *n, char l){
@@ -30,9 +30,9 @@ void shuffle(struct song_node *n){
 }
 
 struct song_node * delete_song(struct song_node *n){
-  ;
+  return n;
 }
 
 struct song_node * clear(struct song_node *n){
-  ;
+  return n;
 }
