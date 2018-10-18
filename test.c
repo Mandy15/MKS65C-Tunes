@@ -10,6 +10,7 @@ int main(){
   insert_front(head, "Natural", "Imagine Dragons");
   insert_order(head, "Always Remember Us This Way", "Lady GaGa");
   insert_order(head, "Head Above Water", "Avril Lavigne");
+  insert_order(head, "Thunder", "Imagine Dragons");
   print_list(head);
   printf("\nFinding \"Always Remember Us This Way\" - Lady GaGa\n");
   find(head, "Always Remember Us This Way","Lady GaGa");
