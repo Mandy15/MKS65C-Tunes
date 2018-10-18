@@ -11,23 +11,27 @@ remove a single specified node from the list
 free the entire list */
 
 struct song_node{
-  char artist[100];
   char song[100];
+  char artist[100];
   struct song_node *next;
 };
 
-struct song_node * insert_front(struct song_node *n, char a[100], char s[100]);
+struct song_node * insert_front(struct song_node *head, char s[100], char a[100]);
 
-struct song_node * insert_order(struct song_node *n, char a[100], char s[100]);
+int compare(struct song_node *x, struct song_node *y);
 
-void print_list(struct song_node *n);
+struct song_node * insert_order(struct song_node *head, char s[100], char a[100]);
 
-struct song_node * find(struct song_node *n, char a[100], char s[100]);
+void print_list(struct song_node *head);
 
-struct song_node * find_artist(struct song_node *n, char a[100]);
+struct song_node * find(struct song_node *head, char s[100], char a[100]);
 
-struct song_node * random_song(struct song_node *n);
+struct song_node * find_artist(struct song_node *head, char a[100]);
 
-struct song_node * remove_song(struct song_node *n);
+int num_elements(struct song_node *head);
 
-struct song_node * free_list(struct song_node *n);
+struct song_node * random_song(struct song_node *head);
+
+struct song_node * remove_song(struct song_node *head, char s[100], char a[100]);
+
+struct song_node * free_list(struct song_node *head);

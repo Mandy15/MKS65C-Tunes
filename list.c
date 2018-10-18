@@ -4,79 +4,121 @@
 #include <time.h>
 #include "list.h"
 
-struct song_node * insert_front(struct song_node *n, char a[100], char s[100]){
+struct song_node * insert_front(struct song_node *head, char s[100], char a[100]){
   struct song_node *x = malloc(sizeof(struct song_node));
-	strcpy(x->artist, a);
 	strcpy(x->song, s);
-  x->next = n;
-	return x;
-}
-
-struct song_node * insert_order(struct song_node *n, char a[100], char s[100]){
-  struct song_node *y = n;
-  struct song_node *x = malloc(sizeof(struct song_node));
   strcpy(x->artist, a);
-	strcpy(x->song, s);
-  if(y->artist > x->artist){
-    x->next = y;
-    return x;
+  x->next = head->next;
+  head->next = x;
+	return head;
+}
+
+int compare(struct song_node *x, struct song_node *y){
+  if(strcmp(x->artist, y->artist) == 0){
+    return strcmp(x->song, y->song);
+  }else{
+    return strcmp(x->artist, y->artist);
   }
-  // while(y->next){
-  //   if(y->a < x->a){
-  //     y = y->next;
-  //   }else if(y->s < x->s){
-  //     y = y->next;
-  //   }
-  // }
-  // x->next = y->next;
-  // y->next = x;
-
-  y->next = x;
-  x->next = NULL;
-  return n;
 }
 
-void print_list(struct song_node *n){
-  while(n){
-		printf("\t\"%s\" - %s", n->artist, n->song);
-		n = n->next;
-	}
-	printf("\n");
-}
-
-struct song_node * find(struct song_node *n, char a[100], char s[100]){
-  while(n){
-    if(n->artist != a && n->song != s){
+struct song_node * insert_order(struct song_node *head, char s[100], char a[100]){
+  struct song_node *n = head;
+  struct song_node *x = malloc(sizeof(struct song_node));
+	strcpy(x->song, s);
+  strcpy(x->artist, a);
+  while(n->next){
+    if(compare(n->next, x) <= 0){
       n = n->next;
     }else{
-      printf("Found: %s - %s\n", a, s);
-      return n;
+      break;
     }
   }
-  return n;
+  x->next = n->next;
+  n->next = x;
+  return head;
 }
 
-struct song_node * find_artist(struct song_node *n, char a[100]){
-  return n;
-}
-
-struct song_node * random_song(struct song_node *n){
-  srand( time(NULL));
-  int i = rand();
-  return n;
-}
-
-struct song_node * remove_song(struct song_node *n){
-  return n;
-}
-
-struct song_node * free_list(struct song_node *n){
-  if(n){
-		struct song_node *x = n->next;
-		free(n);
-		free_list(x);
-	}else{
-		return n;
+void print_list(struct song_node *head){
+  struct song_node *n = head->next;
+  while(n){
+		printf("\"%s\" - %s\n", n->song, n->artist);
+		n = n->next;
 	}
-	return NULL;
+}
+
+struct song_node * find(struct song_node *head, char s[100], char a[100]){
+  struct song_node *n = head;
+  while(n->next){
+    if(strcmp(n->next->song, s) != 0 || strcmp(n->next->artist, a) != 0){
+      n = n->next;
+    }else{
+      printf("Song found: \"%s\" - %s\n", n->next->song, n->next->artist);
+      return n->next;
+    }
+  }
+  printf("Song not found.\n");
+  return head;
+}
+
+struct song_node * find_artist(struct song_node *head, char a[100]){
+  struct song_node *n = head;
+  while(n->next){
+    if(strcmp(n->next->artist, a) != 0){
+      n = n->next;
+    }else{
+      printf("Artist found: \"%s\" - %s\n", n->next->song, n->next->artist);
+      return n->next;
+    }
+  }
+  printf("Artist not found.\n");
+  return head;
+}
+
+int num_elements(struct song_node *head){
+  struct song_node *n = head->next;
+  int x;
+  while(n){
+    x++;
+    n = n->next;
+  }
+  return x;
+}
+
+struct song_node * random_song(struct song_node *head){
+  struct song_node *n = head->next;
+  srand( time(NULL));
+  int i;
+  for(i = rand()%num_elements(head); i > 0; i--){
+    n = n->next;
+  }
+  printf("\"%s\" - %s\n", n->song, n->artist);
+  return n;
+}
+
+struct song_node * remove_song(struct song_node *head, char s[100], char a[100]){
+  struct song_node *n = head;
+  while(n->next){
+    if(strcmp(n->next->song, s) != 0 || strcmp(n->next->artist, a) != 0){
+      n = n->next;
+    }else{
+      printf("Removed: \"%s\" - %s\n", n->next->song, n->next->artist);
+      struct song_node *x = n->next->next;
+      free(n->next);
+      n->next = x;
+      return NULL;
+    }
+  }
+  printf("Song not in list.");
+  return head;
+}
+
+struct song_node * free_list(struct song_node *head){
+  struct song_node *n = head;
+  struct song_node *x;
+  while(n->next){
+		x = n->next;
+    n->next = n->next->next;
+		free(x);
+	}
+	return head;
 }
