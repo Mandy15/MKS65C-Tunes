@@ -29,7 +29,33 @@ int main(){
   print_list(free_list(head));
 
   printf("\n-----------------------------------------------------------------------");
+  // struct song_node * lib[27];
+  // int i;
+  // char x = 'a';
+  // for(i=0;i<27;i++){
+  //   strcpy(lib[i]->artist, x);
+  //   strcpy(lib[i]->song, x);
+  //   lib[i]->next = NULL;
+  //   x++;
+  // }
+
   printf("\nTesting library:\n\nPrint library (after additions):\n");
-  // print_lib();
+  // add_song(lib);
+  // print_lib(lib);
+  // printf("\nSearching for \"\" - \n");
+  // search_song(lib);
+  // printf("\nSearching for \n");
+  // search_artist(lib);
+  // printf("\nAll songs under \n");
+  // print_letter(lib);
+  // printf("\nAll songs by \n");
+  // print_artist(lib);
+  // printf("\nShuffle:\n");
+  // shuffle(lib);
+  // printf("\nDeleting \"\" - \n");
+  // delete_song(lib);
+  // printf("\nClear library:\n");
+  // clear(lib);
+
   return 0;
 }
